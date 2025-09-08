@@ -50,68 +50,7 @@ const handleSubmit = async (e) => {
 };
 
 
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setLoading(true);
-//   setResponseMsg("");
-//   try {
-//     const userData = JSON.parse(data);
-//     let payload = {};
 
-//     if (apiType === "profile") {
-//       payload = {
-//         d: [
-//           {
-//             [identityField]: identityValue,
-//             type: "profile",
-//             profileData: userData.profileData || userData
-//           }
-//         ]
-//       };
-//     } else if (apiType === "event") {
-//       payload = {
-//         d: [
-//           {
-//             [identityField]: identityValue,
-//             type: "event",
-//             evtName: userData.evtName,
-//             evtData: userData.evtData
-//           }
-//         ]
-//       };
-//     }
-
-//     const url = `https://${region}.api.clevertap.com/1/upload`;
-
-//     // Send request (assume backend proxy at /api/clevertap-submit)
-//     const res = await fetch(url, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json; charset=utf-8",
-//         "X-CleverTap-Account-Id": accountId,
-//         "X-CleverTap-Passcode": passcode,
-//       },
-//       body: JSON.stringify(payload),
-
-//     });
-
-//     console.log(payload)
-
-
-//     const result = await res.json();
-//     console.log(result)
-//     console.log(res)
-
-//     if (res.ok && result.success) {
-//       setResponseMsg("✅ " + result.message);
-//     } else {
-//       setResponseMsg("❌ " + (result.message || "Unknown error"));
-//     }
-//   } catch (err) {
-//     setResponseMsg("❌ " + err.message);
-//   }
-//   setLoading(false);
-// };
 
 const eventSamples = [
   
@@ -120,10 +59,9 @@ const eventSamples = [
 ];
 
 const profileSamples = [
-  { label: "Profile Update (Name & Email)", value: JSON.stringify({ profileData: { Name: "John Doe", Email: "john.doe@example.com" } }, null, 2) },
-  { label: "MSG Flags Updation", value: JSON.stringify({ profileData: { "MSG-PUSH-OPTIN": true, "MSG-EMAIL-OPTIN": false, "MSG-SMS-OPTIN": true } }, null, 2) }
+  { label: "Profile Update (Name,Email,etc)", value: JSON.stringify({ profileData: { Name: "John Doe", Email: "john.doe@example.com" } }, null, 2) },
+  { label: "MSG Flags Updation", value: JSON.stringify({ profileData: { "MSG-push": true, "MSG-email": true, "MSG-sms": true,"MSG-whatsapp": true } }, null, 2) }
 ];
-
 
 
 
@@ -160,14 +98,17 @@ const profileSamples = [
         </div>
         <div className="form-group">
           <label htmlFor="region">Region</label>
-          <input
-            type="text"
+          <select
             id="region"
             value={region}
             onChange={e => setRegion(e.target.value)}
             required
-            placeholder="e.g. in1,eu1,us1,etc"
-          />
+          >
+            <option value="eu1">eu1</option>
+            <option value="in1">in1</option>
+            <option value="sg1">sg1</option>
+            <option value="us1">us1</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="apiType">API Type</label>
