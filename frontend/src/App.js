@@ -108,6 +108,8 @@ const profileSamples = [
             <option value="in1">in1</option>
             <option value="sg1">sg1</option>
             <option value="us1">us1</option>
+            <option value="mec1">mec1</option>
+            <option value="aps3">aps3</option>
           </select>
         </div>
         <div className="form-group">
