@@ -190,6 +190,7 @@ const profileSamples = [
           {responseMsg}
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
